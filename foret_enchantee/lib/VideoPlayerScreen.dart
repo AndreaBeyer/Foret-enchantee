@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+import 'package:flick_video_player/flick_video_player.dart';
+
 
 import 'main.dart';
 
@@ -20,15 +22,21 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   final VideoPlayerController controller;
 
   Future<void> _initializeVideoPlayerFuture;
+  FlickManager flickManager;
 
   @override
   void initState() {
+    flickManager = FlickManager(
+        videoPlayerController:
+        controller
+    );
     _initializeVideoPlayerFuture = controller.initialize();
     super.initState();
   }
 
   @override
   void dispose() {
+    flickManager.dispose();
     controller.dispose();
     super.dispose();
   }
@@ -48,8 +56,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
             if (snapshot.connectionState == ConnectionState.done) {
               return AspectRatio(
                 aspectRatio: controller.value.aspectRatio,
-                child: VideoPlayer(
-                    controller
+                child: FlickVideoPlayer(
+                    flickManager: flickManager
                 ),
               );
             } else {

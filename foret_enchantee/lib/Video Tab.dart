@@ -100,7 +100,7 @@ class _VideoTabState extends State<VideoTab> {
                     )
                 ),
               ),
-              Container(
+              /*Container(
                 margin: EdgeInsets.only(right: 0, top: 10),
                 child: FloatingActionButton(
                     heroTag: "btn1",
@@ -130,7 +130,7 @@ class _VideoTabState extends State<VideoTab> {
                       _icon[0][enCours],
                       color: Colors.white,
                     )),
-              ),
+              ),*/
               Container(
                 margin : EdgeInsets.only(left: 30, top: 10),
                 child: FloatingActionButton(

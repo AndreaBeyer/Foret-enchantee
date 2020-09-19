@@ -62,7 +62,7 @@ class _HomeTabState extends State<HomeTabState>{
                     Text(
                         "Bienvenue à la forêt enchantée",
                         style: new TextStyle(
-                          color: secondColor,
+                          color: Colors.black,
                           fontSize: 24,
                           fontFamily: "Lobster",
                         ),
