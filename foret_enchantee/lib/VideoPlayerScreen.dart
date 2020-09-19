@@ -6,31 +6,28 @@ import 'package:flick_video_player/flick_video_player.dart';
 import 'main.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
-  VideoPlayerScreen(this.path, this.controller) : super();
+  VideoPlayerScreen(this.path, this.controller, this.flickManager) : super();
   final String path;
   final VideoPlayerController controller;
+  final FlickManager flickManager;
 
   @override
   _VideoPlayerScreenState createState() =>
-      _VideoPlayerScreenState(path, controller);
+      _VideoPlayerScreenState(path, controller, flickManager);
 }
 
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
-  _VideoPlayerScreenState(this.path, this.controller) : super();
+  _VideoPlayerScreenState(this.path, this.controller, this.flickManager) : super();
 
   final String path;
-  final VideoPlayerController controller;
+  VideoPlayerController controller;
 
   Future<void> _initializeVideoPlayerFuture;
   FlickManager flickManager;
 
   @override
   void initState() {
-    flickManager = FlickManager(
-        videoPlayerController:
-        controller
-    );
-    _initializeVideoPlayerFuture = controller.initialize();
+    _initializeVideoPlayerFuture = controller.seekTo(Duration.zero);
     super.initState();
   }
 
@@ -57,7 +54,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               return AspectRatio(
                 aspectRatio: controller.value.aspectRatio,
                 child: FlickVideoPlayer(
-                    flickManager: flickManager
+                    flickManager: flickManager,
                 ),
               );
             } else {

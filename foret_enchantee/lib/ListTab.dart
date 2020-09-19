@@ -63,7 +63,7 @@ class _MyListPageState extends State<MyListPage> {
       backgroundColor: primaryColor,
       body: tmp,
       floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 30, right: 15),
+        padding: const EdgeInsets.only(bottom: 0, right: 5),
         child: Container(
           height: 60.0,
           width: 60.0,
