@@ -52,7 +52,7 @@ class _VideoTabState extends State<VideoTab> {
     return Scaffold(
       backgroundColor: primaryColor,
       body: Container(
-        height: hauteur,
+        height: MediaQuery.of(context).size.height,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -145,7 +145,7 @@ class _VideoTabState extends State<VideoTab> {
               child: Padding(
                 padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
                 child: new Container(
-                  height: hauteur / 3,
+                  height: MediaQuery.of(context).size.height / 3,
                   decoration: new BoxDecoration(
                     color: Colors.white,
                     borderRadius:

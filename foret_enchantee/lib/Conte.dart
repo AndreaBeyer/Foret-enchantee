@@ -19,29 +19,10 @@ class Conte {
     this.desc = desc;
   }
 
-  Conte.n(Conte p) {
+  Conte.c(Conte p) {
     this.nom = p.nom;
     this.path = p.path;
     this.video = p.video;
     this.desc = p.desc;
-  }
-
-  void fromMap(Map<String, dynamic> map) {
-    this.id = map['id'];
-    this.nom = map['nom'];
-    this.path = map['path'];
-    this.video = map['video'];
-  }
-
-  Map<String, dynamic> toMap() {
-    Map<String, dynamic> map = {
-      'nom': this.nom,
-      'path': this.path,
-      'video': this.video,
-    };
-    if (id != null) {
-      map['id'] = this.id;
-    }
-    return map;
   }
 }

@@ -2,25 +2,25 @@
     {
       "nom": "La forêt enchantée",
       "path": "asset/foret.png",
-      "video": "flutter_assets/foret.mp4",
+      "video": "video_assets/foret.mp4",
       "desc": "Il était une fois une forêt extraordinaire, celle qui peupla nos rêves d’enfant et qui hante encore nos rêves d’adulte. \n\nC’est la forêt magique des contes. Si l’on se réfère aux sources premières de cette littérature originelle, \n\nil n’est point étonnant que l’homme ait cherché à apprivoiser son environnement par la magie du verbe et qu’il ait souvent situé ses premiers récits oraux dans un cadre qui devait susciter à la fois fascination et crainte."
     },
     {
       "nom": "La sorcière",
       "path": "asset/sorciere.png",
-      "video": "flutter_assets/sorciere.mp4",
+      "video": "video_assets/sorciere.mp4",
       "desc": "Il était une fois une terrible sorcière. Elle était non seulement affreusement moche mais aussi terriblement méchante. \n\nElle vivait cachée au fond des bois, car elle avait un grand nez crochu et des ongles en forme de griffes. Les gens en la voyant, devinaient que c'était une sorcière.\n\nMais le soir d'Halloween, comme tout le monde était déguisé, elle en profitait pour venir en ville."
     },
     {
       "nom": "La licorne magique",
       "path": "asset/licorne.png",
-      "video": "flutter_assets/licorne.mp4",
+      "video": "video_assets/licorne.mp4",
       "desc": "Il était une fois une jolie licorne du nom de Lucie qui avait un mignon petit frère.\n\nIl était gentil et elle l’adorait. Mais aujourd’hui, Lucie aurait bien aimé avoir sa maman pour elle toute seule car… c’était son anniversaire.Oui, mais voilà.Plume, son petit frère, était malade aujourd’hui. Pleins de petits points rouges avaient poussé sur son corps.\n\n Et Maman n’avait d’yeux que pour lui un peu triste, Lucie partit pour l’école."
     },
     {
       "nom": "La montagne mystérieuse",
       "path": "asset/montagne.png",
-      "video": "flutter_assets/montagne.mp4",
+      "video": "video_assets/montagne.mp4",
       "desc": "Il était une fois, une petite fille très malheureuse, car chez elle ça ne pouvait être elle même.\n\nSinon, Elsa serait immédiatement considérée comme une sorcière aux yeux des habitants du royaume.\n\nElle possède un incroyable secret :  elle possède le puissant pouvoir de contrôler la neige et la glace"
     }
 ]

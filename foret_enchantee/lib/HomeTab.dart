@@ -6,8 +6,6 @@ import 'main.dart';
 class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    largeur = MediaQuery.of(context).size.width;
-    hauteur = MediaQuery.of(context).size.height;
     return Scaffold(
       body: HomeTabState(),
     );
@@ -31,8 +29,8 @@ class _HomeTabState extends State<HomeTabState> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                height: hauteur - 75,
-                width: largeur,
+                height: MediaQuery.of(context).size.height - 75,
+                width: MediaQuery.of(context).size.width,
                 decoration: new BoxDecoration(color: Colors.white, boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.5),
@@ -58,8 +56,8 @@ class _HomeTabState extends State<HomeTabState> {
                       ),
                     ),
                     Container(
-                      width: largeur,
-                      height: hauteur - 150,
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height - 150,
                       child: Padding(
                         padding: const EdgeInsets.all(3.0),
                         child: SingleChildScrollView(
@@ -85,8 +83,9 @@ class _HomeTabState extends State<HomeTabState> {
                                     top: 15, left: 5, right: 5, bottom: 8),
                                 child: Image.asset(
                                   "asset/enchantee.jpg",
-                                  width: largeur,
-                                  height: hauteur / 4,
+                                  width: MediaQuery.of(context).size.width,
+                                  height:
+                                      MediaQuery.of(context).size.height / 4,
                                 ),
                               ),
                               Container(

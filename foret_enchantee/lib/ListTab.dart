@@ -1,29 +1,18 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Conte.dart';
 import 'Video Tab.dart';
 import 'main.dart';
-import 'dart:convert' as convert;
-
-Future<SharedPreferences> prefs = SharedPreferences.getInstance();
-final String path = "foret_enchantee/JSON/contes.JSON";
 
 class ListTab extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: MyListPage(title: 'Liste de contes'),
     );
   }
-
 }
-
 
 class MyListPage extends StatefulWidget {
   MyListPage({Key key, this.title}) : super(key: key);
@@ -35,7 +24,6 @@ class MyListPage extends StatefulWidget {
 }
 
 class _MyListPageState extends State<MyListPage> {
-
   Widget tmp;
 
   @override
@@ -75,28 +63,28 @@ class _MyListPageState extends State<MyListPage> {
     );
   }
 
-
-  void getList(){
-    tmp = ListView.builder(
-        padding: EdgeInsets.only(left: (5), right: (5), top: 2, bottom: 2),
-        itemCount: listeContes.length,
-        itemBuilder: (context, int index) {
-          return getContainer(listeContes[index]);
-        });
+  void getList() {
+    setState(() {
+      tmp = ListView.builder(
+          padding: EdgeInsets.only(left: (5), right: (5), top: 2, bottom: 2),
+          itemCount: listeContes.getLengthActual(),
+          itemBuilder: (context, int index) {
+            return getContainer(listeContes.getActualAt(index));
+          });
+    });
   }
 
-
-  void restoreList(){
+  void restoreList() {
     setState(() {
-      listeContes = new List();
-      for(int i = 0; i < listeDefaut.length; i++){
-        listeContes.add(listeDefaut.elementAt(i));
+      listeContes.resetActual();
+      for (int i = 0; i < listeContes.getLengthDefault(); i++) {
+        listeContes.addActual(listeContes.getDefautAt(i));
       }
       tmp = ListView.builder(
           padding: EdgeInsets.only(left: (5), right: (5), top: 2, bottom: 2),
-          itemCount: listeDefaut.length,
+          itemCount: listeContes.getLengthDefault(),
           itemBuilder: (context, int index) {
-            return getContainer(listeDefaut[index]);
+            return getContainer(listeContes.getDefautAt(index));
           });
       snackBar("Restauration réussie");
     });
@@ -112,8 +100,8 @@ class _MyListPageState extends State<MyListPage> {
               Container(
                 height: 80,
                 padding: EdgeInsets.only(
-                    left: (largeur / 15.0),
-                    right: (largeur / 15.0),
+                    left: (MediaQuery.of(context).size.width / 15.0),
+                    right: (MediaQuery.of(context).size.width / 15.0),
                     top: 0,
                     bottom: 0),
                 child: new Row(
@@ -145,10 +133,11 @@ class _MyListPageState extends State<MyListPage> {
               ),
             ],
           ),
-          onTap: () async {
+          onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => VideoTab(pers.video, pers.desc)),
+              MaterialPageRoute(
+                  builder: (context) => VideoTab(pers.video, pers.desc)),
             );
           },
         ),
@@ -173,20 +162,14 @@ class _MyListPageState extends State<MyListPage> {
       ),
       onDismissed: (direction) {
         setState(() {
-          suppressPersonne(pers);
+          listeContes.removeActual(pers);
         });
+        getList();
+        snackBar("Marqué comme vu");
       },
     );
   }
 
-  void suppressPersonne(Conte p) {
-    setState(() {
-      listeContes.remove(p);
-      snackBar(
-          "Marqué comme vu"
-      );
-    });
-  }
   void snackBar(String txt) {
     SnackBar snack = new SnackBar(
       backgroundColor: secondColor,
@@ -208,4 +191,3 @@ class _MyListPageState extends State<MyListPage> {
     Scaffold.of(context).showSnackBar(snack);
   }
 }
-

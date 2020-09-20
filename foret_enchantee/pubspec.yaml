@@ -61,10 +61,10 @@ flutter:
     - asset/sorciere.png
     - asset/licorne.png
     - asset/Altkirch.png
-    - flutter_assets/sorciere.mp4
-    - flutter_assets/foret.mp4
-    - flutter_assets/licorne.mp4
-    - flutter_assets/montagne.mp4
+    - video_assets/sorciere.mp4
+    - video_assets/foret.mp4
+    - video_assets/licorne.mp4
+    - video_assets/montagne.mp4
     - JSON/contes.JSON
 
   # An image asset can refer to one or more resolution-specific "variants", see

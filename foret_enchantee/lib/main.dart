@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:foret_enchantee/HomeTab.dart';
+import 'package:foret_enchantee/listeContes.dart';
 
 import 'Conte.dart';
 import 'ListTab.dart';
@@ -9,13 +10,7 @@ import 'ListTab.dart';
 const primaryColor = const Color.fromRGBO(231, 224, 218, 1);
 const secondColor = const Color.fromRGBO(193, 133, 76, 1);
 
-bool first = true;
-
-double largeur;
-double hauteur;
-
-List<Conte> listeContes = new List<Conte>();
-List<Conte> listeDefaut = new List<Conte>();
+final ListeContes listeContes = new ListeContes();
 
 void main() {
   runApp(MyApp());
@@ -49,7 +44,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    if (listeDefaut.isEmpty) {
+    if (listeContes.defaultIsEmpty()) {
       recuperer(context);
     }
     return DefaultTabController(
@@ -86,9 +81,8 @@ class _MyHomePageState extends State<MyHomePage> {
           parsedJson.elementAt(i)['path'],
           parsedJson.elementAt(i)['video'],
           parsedJson.elementAt(i)['desc']);
-      listeDefaut.add(conte);
-      listeContes.add(conte);
-      print(conte.nom);
+      listeContes.addActual(conte);
+      listeContes.addDefault(conte);
     }
   }
 }

@@ -44,8 +44,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       decoration: new BoxDecoration(
         color: secondColor,
       ),
-      width: largeur + 2,
-      height: hauteur * 2 / 5,
+      width: MediaQuery.of(context).size.width + 2,
+      height: MediaQuery.of(context).size.height * 2 / 5,
       padding: const EdgeInsets.only(left: 1, right: 1),
       child: FutureBuilder(
           future: _initializeVideoPlayerFuture,
