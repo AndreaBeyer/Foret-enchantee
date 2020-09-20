@@ -1,39 +1,27 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Conte.dart';
 import 'Video Tab.dart';
 import 'main.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'dart:convert' as convert;
+
+Future<SharedPreferences> prefs = SharedPreferences.getInstance();
+final String path = "foret_enchantee/JSON/contes.JSON";
 
 class ListTab extends StatelessWidget {
 
-
   @override
   Widget build(BuildContext context) {
-    if (first) {
-      listeDefaut
-          .add(new Conte("La forêt enchantée", "asset/foret.png", "flutter_assets/foret.mp4", "Il était une fois une forêt extraordinaire, celle qui peupla nos rêves d’enfant et qui hante encore nos rêves d’adulte. \n\nC’est la forêt magique des contes. Si l’on se réfère aux sources premières de cette littérature originelle, \n\nil n’est point étonnant que l’homme ait cherché à apprivoiser son environnement par la magie du verbe et qu’il ait souvent situé ses premiers récits oraux dans un cadre qui devait susciter à la fois fascination et crainte."));
-      listeDefaut
-          .add(new Conte("La sorcière","asset/sorciere.png", "flutter_assets/sorciere.mp4", "Il était une fois une terrible sorcière. Elle était non seulement affreusement moche mais aussi terriblement méchante. \n\n"
-          "Elle vivait cachée au fond des bois, car elle avait un grand nez crochu et des ongles en forme de griffes. Les gens en la voyant, devinaient que c'était une sorcière.\n\n"
-          "Mais le soir d'Halloween, comme tout le monde était déguisé, elle en profitait pour venir en ville.",));
-      listeDefaut
-          .add(new Conte("La licorne magique", "asset/licorne.png", "flutter_assets/licorne.mp4", "Il était une fois une jolie licorne du nom de Lucie qui avait un mignon petit frère.\n\nIl était gentil et elle l’adorait. Mais aujourd’hui, Lucie aurait bien aimé avoir sa maman pour elle toute seule car… c’était son anniversaire.Oui, mais voilà.Plume, son petit frère, était malade aujourd’hui. Pleins de petits points rouges avaient poussé sur son corps.\n\n Et Maman n’avait d’yeux que pour lui un peu triste, Lucie partit pour l’école."));
-      listeDefaut
-          .add(new Conte("La montagne mystérieuse", "asset/montagne.png", "flutter_assets/montagne.mp4", "Il était une fois, une petite fille très malheureuse, car chez elle ça ne pouvait être elle même.\n\nSinon, Elsa serait immédiatement considérée comme une sorcière aux yeux des habitants du royaume.\n\nElle possède un incroyable secret :  elle possède le puissant pouvoir de contrôler la neige et la glace"));
-
-      for(int i = 0; i < listeDefaut.length; i++){
-        listeContes.add(listeDefaut.elementAt(i));
-      }
-      first = false;
-    }
     return Scaffold(
       body: MyListPage(title: 'Liste de contes'),
     );
   }
+
 }
 
 
@@ -87,6 +75,7 @@ class _MyListPageState extends State<MyListPage> {
     );
   }
 
+
   void getList(){
     tmp = ListView.builder(
         padding: EdgeInsets.only(left: (5), right: (5), top: 2, bottom: 2),
@@ -95,6 +84,7 @@ class _MyListPageState extends State<MyListPage> {
           return getContainer(listeContes[index]);
         });
   }
+
 
   void restoreList(){
     setState(() {

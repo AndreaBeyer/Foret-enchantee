@@ -26,6 +26,9 @@ dependencies:
   permission_handler: ^5.0.1+1
   video_player: ^0.10.12+2
   flick_video_player: ^0.1.1
+  shared_preferences: ^0.5.10
+  http: ^0.12.2
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -62,6 +65,7 @@ flutter:
     - flutter_assets/foret.mp4
     - flutter_assets/licorne.mp4
     - flutter_assets/montagne.mp4
+    - JSON/contes.JSON
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

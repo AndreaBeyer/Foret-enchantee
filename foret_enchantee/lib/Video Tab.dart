@@ -8,7 +8,6 @@ import 'VideoPlayerScreen.dart';
 import 'main.dart';
 
 class VideoTab extends StatefulWidget {
-
   VideoTab(this.path, this.desc) : super();
 
   final String desc;
@@ -44,8 +43,7 @@ class _VideoTabState extends State<VideoTab> {
     super.initState();
     controller = VideoPlayerController.asset(path);
     flickManager = FlickManager(
-        videoPlayerController:
-        controller,
+      videoPlayerController: controller,
     );
   }
 
@@ -85,11 +83,7 @@ class _VideoTabState extends State<VideoTab> {
                   ),
                 ],
               ),
-              child: VideoPlayerScreen(
-                path,
-                controller,
-                flickManager
-              ),
+              child: VideoPlayerScreen(path, controller, flickManager),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -97,7 +91,7 @@ class _VideoTabState extends State<VideoTab> {
                 Container(
                   height: 55.0,
                   width: 55.0,
-                  margin : EdgeInsets.only(top: 10, left: 60),
+                  margin: EdgeInsets.only(top: 10, left: 60),
                   child: FloatingActionButton(
                       heroTag: "btn3",
                       backgroundColor: secondColor,
@@ -107,13 +101,12 @@ class _VideoTabState extends State<VideoTab> {
                       child: Icon(
                         Icons.refresh,
                         color: Colors.white,
-                      )
-                  ),
+                      )),
                 ),
                 Container(
                   height: 55.0,
                   width: 55.0,
-                  margin : EdgeInsets.only(top: 10),
+                  margin: EdgeInsets.only(top: 10),
                   child: FloatingActionButton(
                       heroTag: "btn4",
                       backgroundColor: secondColor,
@@ -131,7 +124,7 @@ class _VideoTabState extends State<VideoTab> {
                 Container(
                   height: 55.0,
                   width: 55.0,
-                  margin : EdgeInsets.only(top: 10, right: 60),
+                  margin: EdgeInsets.only(top: 10, right: 60),
                   child: FloatingActionButton(
                       heroTag: "btn1",
                       backgroundColor: secondColor,
@@ -145,7 +138,6 @@ class _VideoTabState extends State<VideoTab> {
                         color: Colors.white,
                       )),
                 ),
-
               ],
             ),
             Container(
@@ -156,7 +148,8 @@ class _VideoTabState extends State<VideoTab> {
                   height: hauteur / 3,
                   decoration: new BoxDecoration(
                     color: Colors.white,
-                    borderRadius: new BorderRadius.all(const Radius.circular(20.0)),
+                    borderRadius:
+                        new BorderRadius.all(const Radius.circular(20.0)),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.5),
@@ -167,7 +160,8 @@ class _VideoTabState extends State<VideoTab> {
                     ],
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.only(left:20, right: 20, top: 10, bottom: 10),
+                    padding: const EdgeInsets.only(
+                        left: 20, right: 20, top: 10, bottom: 10),
                     child: SingleChildScrollView(
                       child: Text(
                         desc,
@@ -183,7 +177,6 @@ class _VideoTabState extends State<VideoTab> {
                 ),
               ),
             ),
-
           ],
         ),
       ),
@@ -200,8 +193,7 @@ class _VideoTabState extends State<VideoTab> {
               child: Icon(
                 Icons.exit_to_app,
                 color: Colors.white,
-              )
-          ),
+              )),
         ),
       ),
     );

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 
-
 import 'main.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
@@ -17,7 +16,8 @@ class VideoPlayerScreen extends StatefulWidget {
 }
 
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
-  _VideoPlayerScreenState(this.path, this.controller, this.flickManager) : super();
+  _VideoPlayerScreenState(this.path, this.controller, this.flickManager)
+      : super();
 
   final String path;
   VideoPlayerController controller;
@@ -45,7 +45,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         color: secondColor,
       ),
       width: largeur + 2,
-      height: hauteur * 2 /5,
+      height: hauteur * 2 / 5,
       padding: const EdgeInsets.only(left: 1, right: 1),
       child: FutureBuilder(
           future: _initializeVideoPlayerFuture,
@@ -54,11 +54,12 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               return AspectRatio(
                 aspectRatio: controller.value.aspectRatio,
                 child: FlickVideoPlayer(
-                    flickManager: flickManager,
+                  flickManager: flickManager,
                 ),
               );
             } else {
-              return Center(child: CircularProgressIndicator(
+              return Center(
+                  child: CircularProgressIndicator(
                 valueColor: new AlwaysStoppedAnimation<Color>(primaryColor),
               ));
             }
@@ -66,4 +67,3 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     );
   }
 }
-

@@ -12,7 +12,6 @@ class Conte {
     this.desc = null;
   }
 
-
   Conte(String nom, String path, String video, String desc) {
     this.nom = nom;
     this.path = path;
@@ -27,20 +26,20 @@ class Conte {
     this.desc = p.desc;
   }
 
-  void fromMap(Map<String, dynamic> map){
+  void fromMap(Map<String, dynamic> map) {
     this.id = map['id'];
     this.nom = map['nom'];
     this.path = map['path'];
     this.video = map['video'];
   }
 
-  Map<String, dynamic> toMap(){
+  Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {
       'nom': this.nom,
       'path': this.path,
       'video': this.video,
     };
-    if(id != null){
+    if (id != null) {
       map['id'] = this.id;
     }
     return map;
