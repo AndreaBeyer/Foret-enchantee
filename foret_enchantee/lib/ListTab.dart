@@ -44,8 +44,8 @@ class _MyListPageState extends State<MyListPage> {
       backgroundColor: primaryColor,
       body: Padding(
         padding: isIOS
-            ? const EdgeInsets.only(top: 25, bottom: 50, right: 5)
-            : const EdgeInsets.only(bottom: 0, right: 5),
+            ? const EdgeInsets.only(top: 25, bottom: 50)
+            : const EdgeInsets.only(bottom: 0, right: 0),
         child: Scaffold(
           backgroundColor: primaryColor,
           body: SizedBox(
