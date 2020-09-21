@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foret_enchantee/HomeTab.dart';
+import 'package:foret_enchantee/SplashScreen.dart';
 import 'package:foret_enchantee/listeContes.dart';
 
 import 'Conte.dart';
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
     if (isIOS) {
       return CupertinoApp(
         title: 'Forêt Enchantée',
-        home: MyHomePage(title: 'Forêt Enchantée'),
+        home: SplashScreen(),
         debugShowCheckedModeBanner: false,
       );
     } else {
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors.white,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: MyHomePage(title: 'Forêt Enchantée'),
+        home: SplashScreen(),
         debugShowCheckedModeBanner: false,
       );
     }

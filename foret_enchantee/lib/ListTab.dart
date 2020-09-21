@@ -73,7 +73,7 @@ class _MyListPageState extends State<MyListPage> {
                             elevation: 8,
                             backgroundColor: Colors.white,
                             child: new Icon(
-                              Icons.qr_code,
+                              Icons.qr_code_outlined,
                               color: secondColor,
                             ),
                           ),
