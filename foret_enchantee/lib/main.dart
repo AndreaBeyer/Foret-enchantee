@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foret_enchantee/HomeTab.dart';
 import 'package:foret_enchantee/listeContes.dart';
@@ -9,6 +11,8 @@ import 'ListTab.dart';
 
 const primaryColor = const Color.fromRGBO(231, 224, 218, 1);
 const secondColor = const Color.fromRGBO(193, 133, 76, 1);
+
+final bool isIOS = false; //Platform.isIOS;
 
 final ListeContes listeContes = new ListeContes();
 
@@ -20,15 +24,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Forêt Enchantée',
-      theme: ThemeData(
-        primaryColor: secondColor,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(title: 'Forêt Enchantée'),
-      debugShowCheckedModeBanner: false,
-    );
+    if (isIOS) {
+      return CupertinoApp(
+        title: 'Forêt Enchantée',
+        home: MyHomePage(title: 'Forêt Enchantée'),
+        debugShowCheckedModeBanner: false,
+      );
+    } else {
+      return MaterialApp(
+        title: 'Forêt Enchantée',
+        theme: ThemeData(
+          primaryColor: Colors.white,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: MyHomePage(title: 'Forêt Enchantée'),
+        debugShowCheckedModeBanner: false,
+      );
+    }
   }
 }
 
@@ -47,6 +59,10 @@ class _MyHomePageState extends State<MyHomePage> {
     if (listeContes.defaultIsEmpty()) {
       recuperer(context);
     }
+    return isIOS ? getIOS() : getAndroid();
+  }
+
+  Widget getAndroid() {
     return DefaultTabController(
         length: 2,
         child: Scaffold(
@@ -56,8 +72,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 bottom: TabBar(
                   indicatorColor: secondColor,
                   tabs: [
-                    Tab(icon: Icon(Icons.home)),
-                    Tab(icon: Icon(Icons.list)),
+                    Tab(
+                      icon: Icon(
+                        Icons.home,
+                        color: secondColor,
+                      ),
+                    ),
+                    Tab(
+                        icon: Icon(
+                      Icons.list,
+                      color: secondColor,
+                    )),
                   ],
                 ),
               )),
@@ -70,13 +95,64 @@ class _MyHomePageState extends State<MyHomePage> {
         ));
   }
 
+  Widget getIOS() {
+    return PreferredSize(
+      preferredSize: Size.fromHeight(50.0),
+      child: CupertinoTabScaffold(
+        tabBar: CupertinoTabBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(
+                CupertinoIcons.home,
+              ),
+              activeIcon: Icon(
+                CupertinoIcons.home,
+                color: secondColor,
+              ),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.list,
+              ),
+              activeIcon: Icon(
+                Icons.list,
+                color: secondColor,
+              ),
+            ),
+          ],
+        ),
+        tabBuilder: (context, index) {
+          CupertinoTabView returnValue;
+          switch (index) {
+            case 0:
+              returnValue = CupertinoTabView(builder: (context) {
+                return CupertinoPageScaffold(
+                  child: HomeTab(),
+                );
+              });
+              break;
+            case 1:
+              returnValue = CupertinoTabView(builder: (context) {
+                return CupertinoPageScaffold(
+                  child: ListTab(),
+                );
+              });
+              break;
+          }
+          return returnValue;
+        },
+      ),
+    );
+  }
+
   Future<void> recuperer(BuildContext context) async {
     String data =
         await DefaultAssetBundle.of(context).loadString("JSON/contes.JSON");
     var parsedJson = json.decode(data.toString());
 
-    for (int i = 0; i < parsedJson.elementAt(0).length; i++) {
+    for (int i = 0; i < parsedJson.elementAt(i).length; i++) {
       Conte conte = new Conte(
+          parsedJson.elementAt(i)['id'],
           parsedJson.elementAt(i)['nom'],
           parsedJson.elementAt(i)['path'],
           parsedJson.elementAt(i)['video'],

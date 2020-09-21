@@ -9,6 +9,10 @@ class ListeContes {
     _listeDefaut = new List<Conte>();
   }
 
+  bool getActualContain(Conte c) {
+    return _listeContes.contains(c);
+  }
+
   void resetActual() {
     _listeContes = new List<Conte>();
   }
@@ -47,5 +51,23 @@ class ListeContes {
 
   int getLengthDefault() {
     return _listeDefaut.length;
+  }
+
+  Conte searchActualByID(int id) {
+    for (Conte c in _listeContes) {
+      if (c.id == id) {
+        return c;
+      }
+    }
+    return null;
+  }
+
+  Conte searchDefaultByID(int id) {
+    for (Conte c in _listeDefaut) {
+      if (c.id == id) {
+        return c;
+      }
+    }
+    return null;
   }
 }

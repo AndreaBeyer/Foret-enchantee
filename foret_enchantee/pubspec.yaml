@@ -28,6 +28,9 @@ dependencies:
   flick_video_player: ^0.1.1
   shared_preferences: ^0.5.10
   http: ^0.12.2
+  barcode_scan: ^3.0.1
+  qr_flutter: ^3.2.0
+
 
 
   # The following adds the Cupertino Icons font to your application.

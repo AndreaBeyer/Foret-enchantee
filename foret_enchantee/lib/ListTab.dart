@@ -1,3 +1,4 @@
+import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -25,11 +26,15 @@ class MyListPage extends StatefulWidget {
 
 class _MyListPageState extends State<MyListPage> {
   Widget tmp;
+  List<Conte> historicDelete;
+  String barcode;
 
   @override
   void initState() {
     super.initState();
     getList();
+    barcode = '';
+    historicDelete = new List();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   }
 
@@ -37,25 +42,66 @@ class _MyListPageState extends State<MyListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: primaryColor,
-      body: tmp,
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 0, right: 5),
-        child: Container(
-          height: 60.0,
-          width: 60.0,
-          child: FittedBox(
-            child: new FloatingActionButton(
-              onPressed: () {
-                restoreList();
-                //navigateToSubPage(context);
-              },
-              elevation: 8,
-              backgroundColor: secondColor,
-              tooltip: 'Refresh',
-              child: new Icon(
-                Icons.refresh,
-                color: Colors.white,
-              ),
+      body: Padding(
+        padding: isIOS
+            ? const EdgeInsets.only(top: 25, bottom: 50, right: 5)
+            : const EdgeInsets.only(bottom: 0, right: 5),
+        child: Scaffold(
+          backgroundColor: primaryColor,
+          body: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              children: [
+                tmp,
+                Spacer(),
+                Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        height: 60.0,
+                        width: 60.0,
+                        child: FittedBox(
+                          child: new FloatingActionButton(
+                            heroTag: "btnQR",
+                            onPressed: () {
+                              scan();
+                              getList();
+                            },
+                            elevation: 8,
+                            backgroundColor: Colors.white,
+                            child: new Icon(
+                              Icons.qr_code,
+                              color: secondColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 60.0,
+                        width: 60.0,
+                        child: FittedBox(
+                          child: new FloatingActionButton(
+                            heroTag: "btnRS",
+                            onPressed: () {
+                              restoreLastHistory();
+                              getList();
+                            },
+                            elevation: 8,
+                            backgroundColor: Colors.white,
+                            child: new Icon(
+                              Icons.refresh,
+                              color: secondColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         ),
@@ -66,6 +112,7 @@ class _MyListPageState extends State<MyListPage> {
   void getList() {
     setState(() {
       tmp = ListView.builder(
+          shrinkWrap: true,
           padding: EdgeInsets.only(left: (5), right: (5), top: 2, bottom: 2),
           itemCount: listeContes.getLengthActual(),
           itemBuilder: (context, int index) {
@@ -74,20 +121,33 @@ class _MyListPageState extends State<MyListPage> {
     });
   }
 
-  void restoreList() {
-    setState(() {
-      listeContes.resetActual();
-      for (int i = 0; i < listeContes.getLengthDefault(); i++) {
-        listeContes.addActual(listeContes.getDefautAt(i));
+  void restoreLastHistory() {
+    if (historicDelete.isNotEmpty) {
+      setState(() {
+        listeContes.addActual(historicDelete.last);
+        historicDelete.removeLast();
+      });
+    }
+  }
+
+  Future scan() async {
+    try {
+      var result = await BarcodeScanner.scan();
+      setState(() => this.barcode = result.rawContent);
+      int id = 0;
+      id = int.tryParse(barcode);
+      print("code barre :" + barcode);
+      if (id != 0) {
+        id--;
+        Conte tmp = listeContes.getDefautAt(id);
+        Navigator.of(context, rootNavigator: true).push(
+          MaterialPageRoute(
+              builder: (context) => VideoTab(tmp.video, tmp.desc)),
+        );
       }
-      tmp = ListView.builder(
-          padding: EdgeInsets.only(left: (5), right: (5), top: 2, bottom: 2),
-          itemCount: listeContes.getLengthDefault(),
-          itemBuilder: (context, int index) {
-            return getContainer(listeContes.getDefautAt(index));
-          });
-      snackBar("Restauration réussie");
-    });
+    } catch (e) {
+      setState(() => this.barcode = '');
+    }
   }
 
   Dismissible getContainer(Conte pers) {
@@ -134,8 +194,7 @@ class _MyListPageState extends State<MyListPage> {
             ],
           ),
           onTap: () {
-            Navigator.push(
-              context,
+            Navigator.of(context, rootNavigator: true).push(
               MaterialPageRoute(
                   builder: (context) => VideoTab(pers.video, pers.desc)),
             );
@@ -163,9 +222,9 @@ class _MyListPageState extends State<MyListPage> {
       onDismissed: (direction) {
         setState(() {
           listeContes.removeActual(pers);
+          historicDelete.add(pers);
         });
         getList();
-        snackBar("Marqué comme vu");
       },
     );
   }

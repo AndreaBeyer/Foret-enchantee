@@ -45,6 +45,9 @@ class _VideoTabState extends State<VideoTab> {
     flickManager = FlickManager(
       videoPlayerController: controller,
     );
+    enCours = true;
+    enPause = false;
+    enArret = false;
   }
 
   @override
@@ -94,13 +97,13 @@ class _VideoTabState extends State<VideoTab> {
                   margin: EdgeInsets.only(top: 10, left: 60),
                   child: FloatingActionButton(
                       heroTag: "btn3",
-                      backgroundColor: secondColor,
+                      backgroundColor: Colors.white,
                       onPressed: () {
                         flickManager.flickControlManager.replay();
                       },
                       child: Icon(
                         Icons.refresh,
-                        color: Colors.white,
+                        color: secondColor,
                       )),
                 ),
                 Container(
@@ -109,7 +112,7 @@ class _VideoTabState extends State<VideoTab> {
                   margin: EdgeInsets.only(top: 10),
                   child: FloatingActionButton(
                       heroTag: "btn4",
-                      backgroundColor: secondColor,
+                      backgroundColor: Colors.white,
                       onPressed: () {
                         setState(() {
                           flickManager.flickControlManager.togglePlay();
@@ -118,7 +121,7 @@ class _VideoTabState extends State<VideoTab> {
                       },
                       child: Icon(
                         _icon[0][enCours],
-                        color: Colors.white,
+                        color: secondColor,
                       )),
                 ),
                 Container(
@@ -127,7 +130,7 @@ class _VideoTabState extends State<VideoTab> {
                   margin: EdgeInsets.only(top: 10, right: 60),
                   child: FloatingActionButton(
                       heroTag: "btn1",
-                      backgroundColor: secondColor,
+                      backgroundColor: Colors.white,
                       onPressed: () {
                         setState(() {
                           flickManager.flickControlManager.enterFullscreen();
@@ -135,7 +138,7 @@ class _VideoTabState extends State<VideoTab> {
                       },
                       child: Icon(
                         Icons.fullscreen,
-                        color: Colors.white,
+                        color: secondColor,
                       )),
                 ),
               ],
@@ -162,14 +165,22 @@ class _VideoTabState extends State<VideoTab> {
                   child: Padding(
                     padding: const EdgeInsets.only(
                         left: 20, right: 20, top: 10, bottom: 10),
-                    child: SingleChildScrollView(
-                      child: Text(
-                        desc,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: "Lobster",
-                          fontSize: 16,
-                          color: secondColor,
+                    child:
+                        NotificationListener<OverscrollIndicatorNotification>(
+                      onNotification:
+                          (OverscrollIndicatorNotification overscroll) {
+                        overscroll.disallowGlow();
+                        return;
+                      },
+                      child: SingleChildScrollView(
+                        child: Text(
+                          desc,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: "Lobster",
+                            fontSize: 16,
+                            color: secondColor,
+                          ),
                         ),
                       ),
                     ),
@@ -186,13 +197,13 @@ class _VideoTabState extends State<VideoTab> {
           width: 60,
           child: FloatingActionButton(
               heroTag: "btn2",
-              backgroundColor: secondColor,
+              backgroundColor: Colors.white,
               onPressed: () {
                 Navigator.pop(context);
               },
               child: Icon(
                 Icons.exit_to_app,
-                color: Colors.white,
+                color: secondColor,
               )),
         ),
       ),
