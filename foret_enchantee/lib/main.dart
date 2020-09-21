@@ -8,6 +8,7 @@ import 'package:foret_enchantee/listeContes.dart';
 
 import 'Conte.dart';
 import 'ListTab.dart';
+import 'helpTab.dart';
 
 const primaryColor = const Color.fromRGBO(231, 224, 218, 1);
 const secondColor = const Color.fromRGBO(193, 133, 76, 1);
@@ -64,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget getAndroid() {
     return DefaultTabController(
-        length: 2,
+        length: 3,
         child: Scaffold(
           appBar: PreferredSize(
               preferredSize: Size.fromHeight(50.0), // here the desired height
@@ -83,6 +84,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       Icons.list,
                       color: secondColor,
                     )),
+                    Tab(
+                        icon: Icon(
+                      Icons.help_center,
+                      color: secondColor,
+                    )),
                   ],
                 ),
               )),
@@ -90,6 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               HomeTab(),
               ListTab(),
+              HelpTab(),
             ],
           ),
         ));
@@ -119,6 +126,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: secondColor,
               ),
             ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                CupertinoIcons.info,
+              ),
+              activeIcon: Icon(
+                CupertinoIcons.info,
+                color: secondColor,
+              ),
+            ),
           ],
         ),
         tabBuilder: (context, index) {
@@ -135,6 +151,13 @@ class _MyHomePageState extends State<MyHomePage> {
               returnValue = CupertinoTabView(builder: (context) {
                 return CupertinoPageScaffold(
                   child: ListTab(),
+                );
+              });
+              break;
+            case 2:
+              returnValue = CupertinoTabView(builder: (context) {
+                return CupertinoPageScaffold(
+                  child: HelpTab(),
                 );
               });
               break;
