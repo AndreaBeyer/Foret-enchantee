@@ -36,79 +36,6 @@ class _HelpTabState extends State<HelpTab> {
   Widget getIOS() {
     return CupertinoPageScaffold(
       child: Padding(
-        padding: const EdgeInsets.only(top: 33, right: 5, left: 5),
-        child: NotificationListener<OverscrollIndicatorNotification>(
-          onNotification: (OverscrollIndicatorNotification overscroll) {
-            overscroll.disallowGlow();
-            return;
-          },
-          child: SingleChildScrollView(
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height - 95,
-              child: Column(
-                children: [
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          "asset/Altkirch.png",
-                          height: 50,
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(
-                        top: 35, left: 15, right: 15, bottom: 10),
-                    child: Wrap(
-                      direction: Axis.horizontal,
-                      children: [
-                        Text(
-                          _explication,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: "Lobster",
-                            fontSize: 18,
-                            color: secondColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 20.0),
-                    child: Container(
-                      width: _largeur / 1.8,
-                      height: 45,
-                      child: RaisedButton(
-                          onPressed: validRating,
-                          textColor: Colors.white,
-                          color: secondColor,
-                          padding: const EdgeInsets.all(8.0),
-                          child: new Text(
-                            "Questionnaire de satisfaction",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: "Lobster",
-                              fontSize: 18,
-                            ),
-                          )),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget getAndroid() {
-    return Scaffold(
-      body: Padding(
         padding: const EdgeInsets.only(top: 10.0),
         child: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (OverscrollIndicatorNotification overscroll) {
@@ -182,6 +109,187 @@ class _HelpTabState extends State<HelpTab> {
                       ],
                     ),
                     child: Form(
+                        key: _formKey,
+                        child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: _largeur - 35,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(left: _largeur / 5, right: _largeur / 5),
+                                      child: TextFormField(
+                                        style: TextStyle(
+                                          fontFamily: "Lobster",
+                                          fontSize: 18,
+                                          color: Colors.black,
+                                        ),
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: "Votre courriel",
+                                          errorStyle: TextStyle(
+                                            fontFamily: 'Lobster',
+                                          ),
+                                        ),
+                                        validator: (value) => EmailValidator.validate(value) ? null : "Courriel invalide",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: SmoothStarRating(
+                                        allowHalfRating: true,
+                                        onRated: (v) {
+                                          _rated = true;
+                                        },
+                                        starCount: 5,
+                                        rating: _rating,
+                                        size: 40.0,
+                                        isReadOnly:false,
+                                        filledIconData: Icons.star,
+                                        halfFilledIconData: Icons.star_half,
+                                        defaultIconData: Icons.star_border,
+                                        color: secondColor,
+                                        borderColor: secondColor,
+                                        spacing:0.0
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: _largeur,
+                                    height: _hauteur / 5,
+                                    child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextField(
+                                          style: TextStyle(color: Colors.black),
+                                          keyboardType: TextInputType.multiline,
+                                          maxLines: null,
+                                          decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            hintText: "Commentaire (faculatif)",
+                                          ),
+                                        )
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: RaisedButton(
+                                      color: secondColor,
+                                      onPressed: validRating,
+                                      child: new Text(
+                                        "Valider",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ]
+                        )
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget getAndroid() {
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.only(top: 10.0),
+        child: NotificationListener<OverscrollIndicatorNotification>(
+          onNotification: (OverscrollIndicatorNotification overscroll) {
+            overscroll.disallowGlow();
+            return;
+          },
+          child: SingleChildScrollView(
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height - 95,
+              child: Column(
+                children: [
+                  Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "asset/Altkirch.png",
+                          height: 50,
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                        top: 20, left: 15, right: 15, bottom: 5),
+                    child: Wrap(
+                      direction: Axis.horizontal,
+                      children: [
+                        Text(
+                          _title,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: "Lobster",
+                            fontSize: 18,
+                            color: secondColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                        top: 10, left: 15, right: 15, bottom: 10),
+                    child: Wrap(
+                      direction: Axis.horizontal,
+                      children: [
+                        Text(
+                          _explication,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: "Lobster",
+                            fontSize: 18,
+                            color: secondColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    padding: const EdgeInsets.fromLTRB(3,10,3,3),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      boxShadow: [
+                        BoxShadow(
+                          spreadRadius: 1,
+                          color: primaryColor,
+                        )
+                      ],
+                    ),
+                    child: Form(
                       key: _formKey,
                       child: Column(
                           children: [
@@ -189,14 +297,14 @@ class _HelpTabState extends State<HelpTab> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 SizedBox(
-                                  width: _largeur - 35,
+                                  width: _largeur *0.9,
                                   child: Padding(
-                                    padding: EdgeInsets.only(left: _largeur / 5, right: _largeur / 5),
+                                    padding: EdgeInsets.only(left: _largeur / 6, right: _largeur / 6),
                                     child: TextFormField(
                                       style: TextStyle(
                                         fontFamily: "Lobster",
                                         fontSize: 18,
-                                        color: secondColor,
+                                        color: Colors.black,
                                       ),
                                       decoration: InputDecoration(
                                         border: InputBorder.none,
@@ -238,6 +346,31 @@ class _HelpTabState extends State<HelpTab> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
+                                SizedBox(
+                                  width: _largeur *0.9,
+                                  height: _hauteur / 10,
+                                  child: Padding(
+                                    padding: EdgeInsets.fromLTRB(_largeur / 6,8,_largeur / 6,8),
+                                    child: TextField(
+                                      style: TextStyle(
+                                        fontFamily: "Lobster",
+                                        fontSize: 18,
+                                        color: Colors.black,
+                                      ),
+                                      keyboardType: TextInputType.multiline,
+                                      maxLines: null,
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        hintText: "Commentaire (faculatif)",
+                                      ),
+                                    )
+                                  ),
+                                )
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: RaisedButton(
@@ -272,6 +405,7 @@ class _HelpTabState extends State<HelpTab> {
     }
     else if (_formKey.currentState.validate()) {
       snackBar("Envoi réussi");
+      _formKey.currentState.reset();
     }
   }
 
