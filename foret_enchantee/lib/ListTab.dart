@@ -196,12 +196,11 @@ class _MyListPageState extends State<MyListPage> {
     try {
       var result = await BarcodeScanner.scan();
       setState(() => this.barcode = result.rawContent);
-      int id = 0;
-      id = int.tryParse(barcode);
+      //int id = 0;
+      //id = int.tryParse(barcode);
       print("code barre :" + barcode);
-      if (id != 0) {
-        id--;
-        Conte tmp = listeContes.getDefautAt(id);
+      if (barcode != '') {
+        Conte tmp = listeContes.searchDefaultByID(barcode);
         Navigator.of(context, rootNavigator: true).push(
           MaterialPageRoute(
               builder: (context) => VideoTab(tmp.video, tmp.desc)),

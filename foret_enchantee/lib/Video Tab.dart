@@ -55,7 +55,7 @@ class _VideoTabState extends State<VideoTab> {
     return Scaffold(
       backgroundColor: primaryColor,
       body: Container(
-        height: MediaQuery.of(context).size.height - 10,
+        height: MediaQuery.of(context).size.height ,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -86,7 +86,7 @@ class _VideoTabState extends State<VideoTab> {
                   ),
                 ],
               ),
-              child: VideoPlayerScreen(path, controller, flickManager),
+              child: UnconstrainedBox(child: VideoPlayerScreen(path, controller, flickManager)),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
