@@ -1,4 +1,5 @@
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -40,70 +41,131 @@ class _MyListPageState extends State<MyListPage> {
 
   @override
   Widget build(BuildContext context) {
+    return isIOS ? getIOS() : getAndroid();
+  }
+
+  Widget getAndroid(){
     return Scaffold(
       backgroundColor: primaryColor,
-      body: Padding(
-        padding: isIOS
-            ? const EdgeInsets.only(top: 25, bottom: 50)
-            : const EdgeInsets.only(bottom: 0, right: 0),
-        child: Scaffold(
-          backgroundColor: primaryColor,
-          body: SizedBox(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            child: Column(
+      body: Column(
+        children: [
+          SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height - 150,
+              child: tmp
+          ),
+          Spacer(),
+          Padding(
+            padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                tmp,
-                Spacer(),
-                Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        height: 60.0,
-                        width: 60.0,
-                        child: FittedBox(
-                          child: new FloatingActionButton(
-                            heroTag: "btnQR",
-                            onPressed: () {
-                              scan();
-                              getList();
-                            },
-                            elevation: 8,
-                            backgroundColor: Colors.white,
-                            child: new Icon(
-                              Icons.qr_code_outlined,
-                              color: secondColor,
-                            ),
-                          ),
-                        ),
+                Container(
+                  height: 60.0,
+                  width: 60.0,
+                  child: FittedBox(
+                    child: new FloatingActionButton(
+                      heroTag: "btnQR",
+                      onPressed: () {
+                        scan();
+                        getList();
+                      },
+                      elevation: 8,
+                      backgroundColor: Colors.white,
+                      child: new Icon(
+                        Icons.qr_code_outlined,
+                        color: secondColor,
                       ),
-                      Container(
-                        height: 60.0,
-                        width: 60.0,
-                        child: FittedBox(
-                          child: new FloatingActionButton(
-                            heroTag: "btnRS",
-                            onPressed: () {
-                              restoreLastHistory();
-                              getList();
-                            },
-                            elevation: 8,
-                            backgroundColor: Colors.white,
-                            child: new Icon(
-                              Icons.refresh,
-                              color: secondColor,
-                            ),
-                          ),
-                        ),
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 60.0,
+                  width: 60.0,
+                  child: FittedBox(
+                    child: new FloatingActionButton(
+                      heroTag: "btnRS",
+                      onPressed: () {
+                        restoreLastHistory();
+                        getList();
+                      },
+                      elevation: 8,
+                      backgroundColor: Colors.white,
+                      child: new Icon(
+                        Icons.refresh,
+                        color: secondColor,
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ],
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget getIOS(){
+    return CupertinoPageScaffold(
+      backgroundColor: primaryColor,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 30, bottom: 50),
+        child: Column(
+          children: [
+            SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height - 150,
+                child: tmp
+            ),
+            Spacer(),
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    height: 60.0,
+                    width: 60.0,
+                    child: FittedBox(
+                      child: new FloatingActionButton(
+                        heroTag: "btnQR",
+                        onPressed: () {
+                          scan();
+                          getList();
+                        },
+                        elevation: 8,
+                        backgroundColor: Colors.white,
+                        child: new Icon(
+                          Icons.qr_code_outlined,
+                          color: secondColor,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 60.0,
+                    width: 60.0,
+                    child: FittedBox(
+                      child: new FloatingActionButton(
+                        heroTag: "btnRS",
+                        onPressed: () {
+                          restoreLastHistory();
+                          getList();
+                        },
+                        elevation: 8,
+                        backgroundColor: Colors.white,
+                        child: new Icon(
+                          Icons.refresh,
+                          color: secondColor,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

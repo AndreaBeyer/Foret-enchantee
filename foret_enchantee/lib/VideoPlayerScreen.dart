@@ -11,6 +11,7 @@ class VideoPlayerScreen extends StatefulWidget {
   final FlickManager flickManager;
 
   @override
+
   _VideoPlayerScreenState createState() =>
       _VideoPlayerScreenState(path, controller, flickManager);
 }
@@ -61,8 +62,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               } else {
                 return Center(
                     child: CircularProgressIndicator(
-                  valueColor: new AlwaysStoppedAnimation<Color>(primaryColor),
-                ));
+                      valueColor: new AlwaysStoppedAnimation<Color>(primaryColor),
+                    ));
               }
             }),
       ),

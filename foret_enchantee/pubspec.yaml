@@ -70,10 +70,7 @@ flutter:
     - video_assets/licorne.mp4
     - video_assets/montagne.mp4
     - asset/icone.jpg
-    - asset/back.jpg
-    - JSON/contes.JSON
-
-
+    - json/contes.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

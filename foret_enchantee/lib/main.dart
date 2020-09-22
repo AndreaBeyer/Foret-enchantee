@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:foret_enchantee/HomeTab.dart';
-import 'package:foret_enchantee/SplashScreen.dart';
-import 'package:foret_enchantee/listeContes.dart';
 
+import 'HomeTab.dart';
+import 'SplashScreen.dart';
+import 'listeContes.dart';
 import 'Conte.dart';
 import 'ListTab.dart';
 import 'helpTab.dart';
@@ -170,10 +170,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> recuperer(BuildContext context) async {
     String data =
-        await DefaultAssetBundle.of(context).loadString("JSON/contes.JSON");
+        await DefaultAssetBundle.of(context).loadString("json/contes.json");
     var parsedJson = json.decode(data.toString());
 
-    for (int i = 0; i < parsedJson.elementAt(i).length; i++) {
+    for (int i = 0; i < parsedJson.length; i++) {
       Conte conte = new Conte(
           parsedJson.elementAt(i)['id'],
           parsedJson.elementAt(i)['nom'],

@@ -24,7 +24,7 @@ class _HomeTabState extends State<HomeTabState> {
       " d’Altkirch illustre chaque année une dizaine de contes et légendes. \n\nAnimaux de la forêt, personnages mystérieux et décors magiques s’installent au centre-ville "
       "pour vous transporter vers un monde fantastique.\n\nLa période de Noël se veut particulière à Altkirch, pas de marché de Noël traditionnel mais une "
       "mise en scène originale transformant tout le centre-ville en une forêt magique.\n\nÀ cette occasion, découvrez de nombreuses animations :\n"
-      " spectacles de rue et déambulations, animations à la patinoire en plein air, Village des artisans, etc…\n\n";
+      " spectacles de rue et déambulations, animations à la patinoire en plein air, Village des artisans, etc…";
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class _HomeTabState extends State<HomeTabState> {
                   children: [
                     Container(
                       margin:
-                          EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 3),
+                      EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 3),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -102,12 +102,12 @@ class _HomeTabState extends State<HomeTabState> {
                                     "asset/enchantee.jpg",
                                     width: MediaQuery.of(context).size.width,
                                     height:
-                                        MediaQuery.of(context).size.height / 4,
+                                    MediaQuery.of(context).size.height / 4,
                                   ),
                                 ),
                                 Container(
                                   margin: EdgeInsets.only(
-                                      top: 15, left: 5, right: 5, bottom: 8),
+                                      top: 15, left: 5, right: 5, bottom: 0),
                                   child: Wrap(
                                     direction: Axis.horizontal,
                                     children: [
@@ -202,7 +202,7 @@ class _HomeTabState extends State<HomeTabState> {
                                     "asset/enchantee.jpg",
                                     width: MediaQuery.of(context).size.width,
                                     height:
-                                        MediaQuery.of(context).size.height / 4,
+                                    MediaQuery.of(context).size.height / 4,
                                   ),
                                 ),
                                 Container(

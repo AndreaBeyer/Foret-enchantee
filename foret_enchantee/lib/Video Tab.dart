@@ -55,7 +55,7 @@ class _VideoTabState extends State<VideoTab> {
     return Scaffold(
       backgroundColor: primaryColor,
       body: Container(
-        height: MediaQuery.of(context).size.height,
+        height: MediaQuery.of(context).size.height - 10,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -152,7 +152,7 @@ class _VideoTabState extends State<VideoTab> {
                   decoration: new BoxDecoration(
                     color: Colors.white,
                     borderRadius:
-                        new BorderRadius.all(const Radius.circular(20.0)),
+                    new BorderRadius.all(const Radius.circular(20.0)),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.5),
@@ -166,7 +166,7 @@ class _VideoTabState extends State<VideoTab> {
                     padding: const EdgeInsets.only(
                         left: 20, right: 20, top: 10, bottom: 10),
                     child:
-                        NotificationListener<OverscrollIndicatorNotification>(
+                    NotificationListener<OverscrollIndicatorNotification>(
                       onNotification:
                           (OverscrollIndicatorNotification overscroll) {
                         overscroll.disallowGlow();
@@ -194,7 +194,7 @@ class _VideoTabState extends State<VideoTab> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 0, right: 5),
         child: Container(
-          width: 60,
+          width: 65,
           child: FloatingActionButton(
               heroTag: "btn2",
               backgroundColor: Colors.white,
