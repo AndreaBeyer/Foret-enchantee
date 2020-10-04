@@ -3,10 +3,12 @@ import 'Conte.dart';
 class ListeContes {
   List<Conte> _listeContes;
   List<Conte> _listeDefaut;
+  List<Conte> _historicDelete;
 
   ListeContes() {
     _listeContes = new List<Conte>();
     _listeDefaut = new List<Conte>();
+    _historicDelete = new List<Conte>();
   }
 
   bool getActualContain(Conte c) {
@@ -25,6 +27,14 @@ class ListeContes {
     _listeDefaut.add(c);
   }
 
+  void addHistoric(Conte c) {
+    _historicDelete.add(c);
+  }
+
+  Conte getLastHistory() {
+    return _historicDelete.last;
+  }
+
   Conte getDefautAt(int i) {
     return _listeDefaut.elementAt(i);
   }
@@ -41,8 +51,15 @@ class ListeContes {
     return _listeDefaut.isEmpty;
   }
 
+  bool historicIsEmpty(){
+    return _historicDelete.isEmpty;
+  }
+
   void removeActual(Conte c) {
     _listeContes.remove(c);
+  }
+  void removeLastHistory() {
+    _historicDelete.removeLast();
   }
 
   int getLengthActual() {

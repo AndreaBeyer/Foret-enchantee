@@ -224,174 +224,172 @@ class _HelpTabState extends State<HelpTab> {
             return;
           },
           child: SingleChildScrollView(
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height - 95,
-              child: Column(
-                children: [
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          "asset/Altkirch.png",
-                          height: 50,
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(
-                        top: 20, left: 15, right: 15, bottom: 5),
-                    child: Wrap(
-                      direction: Axis.horizontal,
-                      children: [
-                        Text(
-                          _title,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: "Lobster",
-                            fontSize: 18,
-                            color: secondColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(
-                        top: 10, left: 15, right: 15, bottom: 10),
-                    child: Wrap(
-                      direction: Axis.horizontal,
-                      children: [
-                        Text(
-                          _explication,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: "Lobster",
-                            fontSize: 18,
-                            color: secondColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                    padding: const EdgeInsets.fromLTRB(3,10,3,3),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      boxShadow: [
-                        BoxShadow(
-                          spreadRadius: 1,
-                          color: primaryColor,
-                        )
-                      ],
-                    ),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: _largeur *0.9,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(left: _largeur / 6, right: _largeur / 6),
-                                    child: TextFormField(
-                                      style: TextStyle(
-                                        fontFamily: "Lobster",
-                                        fontSize: 18,
-                                        color: Colors.black,
-                                      ),
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                          hintText: "Votre courriel",
-                                          errorStyle: TextStyle(
-                                            fontFamily: 'Lobster',
-                                          ),
-                                      ),
-                                      validator: (value) => EmailValidator.validate(value) ? null : "Courriel invalide",
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: SmoothStarRating(
-                                      allowHalfRating: true,
-                                      onRated: (v) {
-                                        _rated = true;
-                                      },
-                                      starCount: 5,
-                                      rating: _rating,
-                                      size: 40.0,
-                                      isReadOnly:false,
-                                      filledIconData: Icons.star,
-                                      halfFilledIconData: Icons.star_half,
-                                      defaultIconData: Icons.star_border,
-                                      color: secondColor,
-                                      borderColor: secondColor,
-                                      spacing:0.0
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: _largeur *0.9,
-                                  height: _hauteur / 10,
-                                  child: Padding(
-                                    padding: EdgeInsets.fromLTRB(_largeur / 6,8,_largeur / 6,8),
-                                    child: TextField(
-                                      style: TextStyle(
-                                        fontFamily: "Lobster",
-                                        fontSize: 18,
-                                        color: Colors.black,
-                                      ),
-                                      keyboardType: TextInputType.multiline,
-                                      maxLines: null,
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        hintText: "Commentaire (faculatif)",
-                                      ),
-                                    )
-                                  ),
-                                )
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: RaisedButton(
-                                    color: secondColor,
-                                    onPressed: validRating,
-                                    child: new Text(
-                                      "Valider",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ]
+            child: Column(
+              children: [
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        "asset/Altkirch.png",
+                        height: 50,
                       )
-                    ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                      top: 20, left: 15, right: 15, bottom: 5),
+                  child: Wrap(
+                    direction: Axis.horizontal,
+                    children: [
+                      Text(
+                        _title,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: "Lobster",
+                          fontSize: 18,
+                          color: secondColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                      top: 10, left: 15, right: 15, bottom: 10),
+                  child: Wrap(
+                    direction: Axis.horizontal,
+                    children: [
+                      Text(
+                        _explication,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: "Lobster",
+                          fontSize: 18,
+                          color: secondColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  padding: const EdgeInsets.fromLTRB(3,10,3,3),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    boxShadow: [
+                      BoxShadow(
+                        spreadRadius: 1,
+                        color: primaryColor,
+                      )
+                    ],
+                  ),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: _largeur *0.9,
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: _largeur / 6, right: _largeur / 6),
+                                  child: TextFormField(
+                                    keyboardType: TextInputType.emailAddress,
+                                    style: TextStyle(
+                                      fontFamily: "Lobster",
+                                      fontSize: 18,
+                                      color: Colors.black,
+                                    ),
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                        hintText: "Votre courriel",
+                                        errorStyle: TextStyle(
+                                          fontFamily: 'Lobster',
+                                        ),
+                                    ),
+                                    validator: (value) => EmailValidator.validate(value) ? null : "Courriel invalide",
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SmoothStarRating(
+                                    allowHalfRating: true,
+                                    onRated: (v) {
+                                      _rated = true;
+                                    },
+                                    starCount: 5,
+                                    rating: _rating,
+                                    size: 40.0,
+                                    isReadOnly:false,
+                                    filledIconData: Icons.star,
+                                    halfFilledIconData: Icons.star_half,
+                                    defaultIconData: Icons.star_border,
+                                    color: secondColor,
+                                    borderColor: secondColor,
+                                    spacing:0.0
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: _largeur *0.9,
+                                height: _hauteur / 10,
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(_largeur / 6,8,_largeur / 6,8),
+                                  child: TextField(
+                                    style: TextStyle(
+                                      fontFamily: "Lobster",
+                                      fontSize: 18,
+                                      color: Colors.black,
+                                    ),
+                                    keyboardType: TextInputType.multiline,
+                                    maxLines: null,
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: "Commentaire (faculatif)",
+                                    ),
+                                  )
+                                ),
+                              )
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: RaisedButton(
+                                  color: secondColor,
+                                  onPressed: validRating,
+                                  child: new Text(
+                                    "Valider",
+                                    style: TextStyle(
+                                      fontFamily: "Lobster",
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ]
+                    )
+                  ),
+                ),
+              ],
             ),
           ),
         ),

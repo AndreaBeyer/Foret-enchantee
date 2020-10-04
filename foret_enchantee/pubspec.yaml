@@ -33,6 +33,7 @@ dependencies:
   flutter_splash_screen: ^0.1.0
   smooth_star_rating: 1.1.1
   email_validator: '^1.0.0'
+  font_awesome_flutter: 8.8.1
 
 
 
@@ -102,5 +103,14 @@ flutter:
     - family: Lobster
       fonts:
         - asset: fonts/Lobster-Regular.ttf
+    - family:  Qr_code_ico
+      fonts:
+        - asset: fonts/Qr_code_ico.ttf
+    - family:  Info_ico
+      fonts:
+        - asset: fonts/Info_ico.ttf
+    - family:  Refresh_ico
+      fonts:
+        -  asset: fonts/Refresh_ico.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

@@ -2,6 +2,8 @@ import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:foret_enchantee/qr_code_ico_icons.dart';
 
 import 'Conte.dart';
 import 'Video Tab.dart';
@@ -27,7 +29,6 @@ class MyListPage extends StatefulWidget {
 
 class _MyListPageState extends State<MyListPage> {
   Widget tmp;
-  List<Conte> historicDelete;
   String barcode;
 
   @override
@@ -35,7 +36,6 @@ class _MyListPageState extends State<MyListPage> {
     super.initState();
     getList();
     barcode = '';
-    historicDelete = new List();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   }
 
@@ -73,7 +73,7 @@ class _MyListPageState extends State<MyListPage> {
                       elevation: 8,
                       backgroundColor: Colors.white,
                       child: new Icon(
-                        Icons.qr_code_outlined,
+                        Qr_code_ico.qrcode,
                         color: secondColor,
                       ),
                     ),
@@ -137,7 +137,7 @@ class _MyListPageState extends State<MyListPage> {
                         elevation: 8,
                         backgroundColor: Colors.white,
                         child: new Icon(
-                          Icons.qr_code_outlined,
+                          FontAwesomeIcons.qrcode,
                           color: secondColor,
                         ),
                       ),
@@ -156,7 +156,7 @@ class _MyListPageState extends State<MyListPage> {
                         elevation: 8,
                         backgroundColor: Colors.white,
                         child: new Icon(
-                          Icons.refresh,
+                          FontAwesomeIcons.arrowAltCircleDown,
                           color: secondColor,
                         ),
                       ),
@@ -184,12 +184,17 @@ class _MyListPageState extends State<MyListPage> {
   }
 
   void restoreLastHistory() {
-    if (historicDelete.isNotEmpty) {
+    if (!listeContes.historicIsEmpty()) {
       setState(() {
-        listeContes.addActual(historicDelete.last);
-        historicDelete.removeLast();
+        listeContes.addActual(listeContes.getLastHistory());
+        listeContes.removeLastHistory();
       });
+      snackBar("Restauration réussie");
     }
+    else{
+      snackBar("La liste est déja pleine");
+    }
+
   }
 
   Future scan() async {
@@ -211,7 +216,7 @@ class _MyListPageState extends State<MyListPage> {
     }
   }
 
-  Dismissible getContainer(Conte pers) {
+  Dismissible getContainer(Conte conte) {
     return new Dismissible(
       key: UniqueKey(),
       child: Card(
@@ -232,7 +237,7 @@ class _MyListPageState extends State<MyListPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           new Image.asset(
-                            pers.path,
+                            conte.path,
                             width: 50,
                           ),
                         ]),
@@ -240,7 +245,7 @@ class _MyListPageState extends State<MyListPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         new Text(
-                          pers.nom,
+                          conte.nom,
                           style: new TextStyle(
                             fontSize: 23,
                             color: secondColor,
@@ -257,7 +262,7 @@ class _MyListPageState extends State<MyListPage> {
           onTap: () {
             Navigator.of(context, rootNavigator: true).push(
               MaterialPageRoute(
-                  builder: (context) => VideoTab(pers.video, pers.desc)),
+                  builder: (context) => VideoTab(conte.video, conte.desc)),
             );
           },
         ),
@@ -282,10 +287,11 @@ class _MyListPageState extends State<MyListPage> {
       ),
       onDismissed: (direction) {
         setState(() {
-          listeContes.removeActual(pers);
-          historicDelete.add(pers);
+          listeContes.removeActual(conte);
+          listeContes.addHistoric(conte);
         });
         getList();
+        snackBar("Marqué comme vu");
       },
     );
   }

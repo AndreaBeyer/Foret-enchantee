@@ -1,10 +1,13 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'HomeTab.dart';
 import 'SplashScreen.dart';
+import 'info_ico_icons.dart';
 import 'listeContes.dart';
 import 'Conte.dart';
 import 'ListTab.dart';
@@ -13,7 +16,7 @@ import 'helpTab.dart';
 const primaryColor = const Color.fromRGBO(231, 224, 218, 1);
 const secondColor = const Color.fromRGBO(193, 133, 76, 1);
 
-final bool isIOS = false; //Platform.isIOS;
+final bool isIOS = Platform.isIOS;
 
 final ListeContes listeContes = new ListeContes();
 
@@ -86,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     )),
                     Tab(
                         icon: Icon(
-                      Icons.help_center,
+                          Info_ico.info,
                       color: secondColor,
                     )),
                   ],
